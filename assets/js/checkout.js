@@ -162,7 +162,7 @@ function processCheckoutOrder(data) {
     
     // Генеруємо унікальний ID замовлення
     var orderId = 'ORD-' + Date.now();
-    var confirmUrl = window.location.origin + '/corasir/confirm-order.html?order=' + orderId;
+    var confirmUrl = window.location.origin + '/corasir/pages/confirm-order.html?order=' + orderId;
     
     var orderData = {
         customerName: data.name,
@@ -306,6 +306,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 console.log('✅ checkout.js повністю завантажено');
+
 
 
 
