@@ -30,7 +30,10 @@ function displayOrderItems() {
         var itemTotal = item.product.price * item.quantity;
         totalPrice += itemTotal;
         
-        var emoji = item.product.category.includes('Рідинне') ? '❄️' : '🌀';
+        var imgSrc = item.product.image || '';
+        var imageHtml = imgSrc 
+            ? '<img src="' + imgSrc + '" alt="' + item.product.name + '" style="width:70px;height:70px;object-fit:cover;border-radius:10px;border:2px solid rgba(157,78,221,0.4);">'
+            : '<span style="font-size:2.5rem;">' + (item.product.category.includes('Рідинне') ? '❄️' : '🌀') + '</span>';
         
         var itemDiv = document.createElement('div');
         itemDiv.style.padding = '1.5rem';
@@ -45,7 +48,7 @@ function displayOrderItems() {
         itemDiv.style.transition = 'all 0.3s ease';
         
         itemDiv.innerHTML = 
-            '<div style="font-size: 2.5rem;">' + emoji + '</div>' +
+            '<div style="display:flex;align-items:center;justify-content:center;width:70px;height:70px;flex-shrink:0;">' + imageHtml + '</div>' +
             '<div style="flex: 1;">' +
                 '<strong style="color: var(--accent-color); font-size: 1.1rem;">' + item.product.name + '</strong><br>' +
                 '<span style="color: var(--text-secondary); font-size: 0.9rem;">' + item.product.category + '</span><br>' +
@@ -137,10 +140,10 @@ function processCheckoutOrder(data) {
         var itemTotal = item.product.price * item.quantity;
         totalPrice += itemTotal;
         
-        // Використовуємо img теги замість emoji для кращої сумісності
-        var emojiImg = item.product.category.includes('Рідинне') 
-            ? '❄️' // Unicode emoji
-            : '🌀';
+        // Використовуємо img теги для реального фото продукту в email
+        var emojiImg = item.product.image 
+            ? '<img src="' + item.product.image + '" alt="' + item.product.name + '" width="50" height="50" style="object-fit:cover;border-radius:8px;" />'
+            : (item.product.category.includes('Рідинне') ? '❄️' : '🌀');
         
         productsListHTML += 
             '<div style="background: #f9f9f9; padding: 20px; margin: 15px 0; border-radius: 12px; border-left: 4px solid #9d4edd; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">' +
@@ -162,7 +165,7 @@ function processCheckoutOrder(data) {
     
     // Генеруємо унікальний ID замовлення
     var orderId = 'ORD-' + Date.now();
-    var confirmUrl = window.location.origin + '/corasir/pages/confirm-order.html?order=' + orderId;
+    var confirmUrl = window.location.origin + '/site.atestaciyna/confirm-order.html?order=' + orderId;
     
     var orderData = {
         customerName: data.name,
@@ -239,8 +242,11 @@ function showCheckoutSuccess(orderData) {
     var productsListHTML = '';
     for (var i = 0; i < cart.length; i++) {
         var item = cart[i];
-        var emoji = item.product.category.includes('Рідинне') ? '❄️' : '🌀';
-        productsListHTML += '<p style="margin: 8px 0; padding: 10px; background: rgba(157, 78, 221, 0.1); border-radius: 8px;"><span style="font-size: 1.5rem;">' + emoji + '</span> <strong>' + item.product.name + '</strong> (' + item.quantity + ' шт.) - ' + (item.product.price * item.quantity).toLocaleString('uk-UA') + ' грн</p>';
+        var imgSrc = item.product.image || '';
+        var imgTag = imgSrc 
+            ? '<img src="' + imgSrc + '" alt="' + item.product.name + '" style="width:40px;height:40px;object-fit:cover;border-radius:6px;vertical-align:middle;margin-right:8px;">'
+            : '<span style="font-size:1.5rem;vertical-align:middle;margin-right:8px;">' + (item.product.category.includes('Рідинне') ? '❄️' : '🌀') + '</span>';
+        productsListHTML += '<p style="margin: 8px 0; padding: 10px; background: rgba(157, 78, 221, 0.1); border-radius: 8px; display:flex; align-items:center;">' + imgTag + ' <strong>' + item.product.name + '</strong> (' + item.quantity + ' шт.) - ' + (item.product.price * item.quantity).toLocaleString('uk-UA') + ' грн</p>';
     }
     
     var modalBody = '<div style="text-align: center; padding: 30px;">' +
@@ -306,7 +312,5 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 console.log('✅ checkout.js повністю завантажено');
-
-
 
 

@@ -178,11 +178,27 @@
             transition: all 0.3s ease;
             text-decoration: none;
             text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-details svg {
+            width: 20px;
+            height: 20px;
+            transition: transform 0.3s ease;
         }
 
         .btn-details:hover {
             background: #00d4ff;
             color: #0a0e27;
+        }
+        
+        .btn-details:hover svg {
+            transform: rotate(180deg);
         }
 
         .btn-add-cart {
@@ -219,6 +235,38 @@
     </style>
 </head>
 <body>
+    <!-- ═══ ANIMATED CORSAIR COOLER BACKGROUND ═══ -->
+    <div class="bg-coolers-layer" aria-hidden="true">
+      <object class="bg-cooler" data="../assets/svg/bg/aio-240.svg" type="image/svg+xml"
+        style="width:320px;top:2%;left:1%;--dur:13s;--delay:0s;--op:.09;--op2:.14;--sc1:1;--sc2:1.03;--rot:0deg;--rot2:2deg;"></object>
+      <object class="bg-cooler" data="../assets/svg/bg/aio-240.svg" type="image/svg+xml"
+        style="width:280px;top:55%;left:60%;--dur:15s;--delay:-5s;--op:.07;--op2:.12;--sc1:1;--sc2:1.04;--rot:0deg;--rot2:-3deg;"></object>
+      <object class="bg-cooler" data="../assets/svg/bg/aio-360.svg" type="image/svg+xml"
+        style="width:420px;top:28%;left:35%;--dur:18s;--delay:-3s;--op:.06;--op2:.11;--sc1:1;--sc2:1.02;--rot:0deg;--rot2:1deg;"></object>
+      <object class="bg-cooler" data="../assets/svg/bg/aio-360.svg" type="image/svg+xml"
+        style="width:360px;top:70%;left:-2%;--dur:14s;--delay:-8s;--op:.08;--op2:.13;--sc1:1;--sc2:1.03;--rot:0deg;--rot2:2deg;"></object>
+      <object class="bg-cooler" data="../assets/svg/bg/air-tower.svg" type="image/svg+xml"
+        style="width:200px;top:5%;left:70%;--dur:16s;--delay:-2s;--op:.08;--op2:.13;--sc1:1;--sc2:1.04;--rot:0deg;--rot2:-2deg;"></object>
+      <object class="bg-cooler" data="../assets/svg/bg/air-tower.svg" type="image/svg+xml"
+        style="width:220px;top:60%;left:38%;--dur:12s;--delay:-6s;--op:.07;--op2:.12;--sc1:1;--sc2:1.05;--rot:0deg;--rot2:3deg;"></object>
+      <object class="bg-cooler" data="../assets/svg/bg/air-tower.svg" type="image/svg+xml"
+        style="width:180px;top:35%;left:82%;--dur:17s;--delay:-11s;--op:.07;--op2:.11;--sc1:1;--sc2:1.03;--rot:0deg;--rot2:-1deg;"></object>
+      <object class="bg-cooler" data="../assets/svg/bg/fan-120.svg" type="image/svg+xml"
+        style="width:180px;top:15%;left:48%;--dur:11s;--delay:-4s;--op:.09;--op2:.15;--sc1:1;--sc2:1.06;--rot:0deg;--rot2:4deg;"></object>
+      <object class="bg-cooler" data="../assets/svg/bg/fan-120.svg" type="image/svg+xml"
+        style="width:160px;top:75%;left:22%;--dur:13s;--delay:-9s;--op:.08;--op2:.13;--sc1:1;--sc2:1.04;--rot:0deg;--rot2:-2deg;"></object>
+      <object class="bg-cooler" data="../assets/svg/bg/fan-120.svg" type="image/svg+xml"
+        style="width:140px;top:42%;left:8%;--dur:15s;--delay:-1s;--op:.07;--op2:.12;--sc1:1;--sc2:1.05;--rot:0deg;--rot2:3deg;"></object>
+      <object class="bg-cooler" data="../assets/svg/bg/air-dual-tower.svg" type="image/svg+xml"
+        style="width:260px;top:3%;left:26%;--dur:16s;--delay:-7s;--op:.07;--op2:.12;--sc1:1;--sc2:1.03;--rot:0deg;--rot2:2deg;"></object>
+      <object class="bg-cooler" data="../assets/svg/bg/air-dual-tower.svg" type="image/svg+xml"
+        style="width:230px;top:65%;left:75%;--dur:14s;--delay:-12s;--op:.06;--op2:.10;--sc1:1;--sc2:1.04;--rot:0deg;--rot2:-2deg;"></object>
+      <object class="bg-cooler" data="../assets/svg/bg/aio-360-titan.svg" type="image/svg+xml"
+        style="width:440px;top:42%;left:50%;--dur:20s;--delay:-4s;--op:.05;--op2:.09;--sc1:1;--sc2:1.02;--rot:0deg;--rot2:1deg;"></object>
+      <object class="bg-cooler" data="../assets/svg/bg/aio-360-titan.svg" type="image/svg+xml"
+        style="width:380px;top:82%;left:15%;--dur:17s;--delay:-16s;--op:.06;--op2:.10;--sc1:1;--sc2:1.03;--rot:0deg;--rot2:-1deg;"></object>
+    </div>
+
     <!-- Шапка сайту -->
     <header id="header">
     <nav class="navbar">
@@ -243,7 +291,7 @@
             <li><a href="media.html">Медіа</a></li>
             <li><a href="contact.html">Контакти</a></li>
             <li><a href="cart.html" class="cart-link">
-                <span class="cart-icon">🛒</span>
+                <span class="cart-icon"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg></span>
                 <span class="cart-text">Кошик</span>
                 <span class="cart-badge" id="cartCount">0</span>
             </a></li>
@@ -261,6 +309,7 @@
             <h1>Наша продукція</h1>
             <p>Високоефективні системи охолодження для вашого ПК</p>
         </div>
+        <div class="rgb-divider" style="margin-bottom:30px;"></div>
 
         <div class="filter-section">
             <button class="filter-btn active" onclick="filterProducts('all')">Всі товари</button>
@@ -333,23 +382,28 @@
                 <div class="footer-section">
                     <h4>Контакти</h4>
                     <ul class="footer-contacts">
-                        <li>📍 вул. Технологічна 15, Київ</li>
-                        <li>📞 +380 44 123 45 67</li>
-                        <li>✉️ info@corsar.ua</li>
-                        <li>🕐 Пн-Пт: 9:00 - 18:00</li>
+                        <li><svg viewBox="0 0 24 24" fill="#ff6644" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg> вул. Технологічна 15, Київ</li>
+                        <li><svg viewBox="0 0 24 24" fill="#44cc88" xmlns="http://www.w3.org/2000/svg"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg> +380 44 123 45 67</li>
+                        <li><svg viewBox="0 0 24 24" fill="#44aaff" xmlns="http://www.w3.org/2000/svg"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg> info@corsar.ua</li>
+                        <li><svg viewBox="0 0 24 24" fill="#ffcc44" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm.5 5v5.25l4.5 2.67-.75 1.23L11 13V7h1.5z"/></svg> Пн-Пт: 9:00 - 18:00</li>
                     </ul>
+                </div>
+            
+                <div class="footer-section footer-author-section">
+                    <h4>Про проєкт</h4>
+                    <div class="footer-author-inner">
+                        <p class="footer-made">Зроблено з <svg viewBox="0 0 24 24" width="16" height="16" style="display:inline;vertical-align:middle;fill:#e74c3c"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg> в Україні</p>
+                        <p class="footer-diploma">
+                            <strong>Автор:</strong> Казимірський Максим<br>
+                            <strong>Навчальний заклад:</strong> ВПУ №1 міста Рівне<br>
+                            <strong>Проєкт:</strong> Дипломна робота
+                        </p>
+                        <a href="project.html" class="btn-project-page" style="display:block;margin-top:1rem;text-align:center;padding:0.6rem 1rem;background:linear-gradient(135deg,rgba(0,212,255,0.12),rgba(0,153,255,0.12));border:1px solid rgba(0,212,255,0.35);border-radius:8px;color:#00d4ff;text-decoration:none;font-size:0.82rem;font-weight:600;letter-spacing:0.5px;transition:all 0.3s ease;">&#10022; Детальніше про проект &#8594;</a>
+                    </div>
                 </div>
             </div>
             <div class="footer-bottom">
                 <p>&copy; 2026 CORSAIR. Всі права захищені.</p>
-                <div class="footer-author">
-                    <p class="footer-made">Зроблено з ❤️ в Україні</p>
-                    <p class="footer-diploma">
-                        <strong>Автор:</strong> Казимірський Максим<br>
-                        <strong>Навчальний заклад:</strong> ВПУ №1 міста Рівне<br>
-                        <strong>Проєкт:</strong> Дипломна робота
-                    </p>
-                </div>
             </div>
         </div>
     </footer>
@@ -390,7 +444,13 @@
                             <div class="product-price">${product.price.toLocaleString('uk-UA')} грн</div>
                         </div>
                         <div class="product-actions">
-                            <a href="product-detail.html?id=${product.id}" class="btn-details">Дізнатись більше</a>
+                            <a href="product-detail.html?id=${product.id}" class="btn-details">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M12 2v4m0 12v4M4.93 4.93l2.83 2.83m8.48 8.48l2.83 2.83M2 12h4m12 0h4M4.93 19.07l2.83-2.83m8.48-8.48l2.83-2.83"/>
+                                    <circle cx="12" cy="12" r="3"/>
+                                </svg>
+                                Дізнатись більше
+                            </a>
                             <button class="btn-add-cart" onclick="addToCart(${product.id}, 1)">В кошик</button>
                         </div>
                     </div>

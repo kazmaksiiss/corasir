@@ -64,26 +64,46 @@ function addToCart(productId, quantity) {
     }
     
     saveCart();
-    showCartNotification(product.name);
+    showCartNotification(product.name, product.image);
 }
 
 // Показати повідомлення про додавання в кошик
-function showCartNotification(productName) {
+function showCartNotification(productName, productImage) {
+    // Видалити попереднє повідомлення якщо є
+    var existing = document.querySelector('.cart-notification');
+    if (existing) {
+        existing.remove();
+    }
+    
     var notification = document.createElement('div');
     notification.className = 'cart-notification';
-    notification.innerHTML = '✓ ' + productName + ' додано в кошик!';
+    
+    var imgHtml = productImage 
+        ? '<img src="' + productImage + '" alt="" style="width:50px;height:50px;object-fit:cover;border-radius:8px;flex-shrink:0;">'
+        : '<span style="font-size:2rem;">🛒</span>';
+    
+    notification.innerHTML = 
+        imgHtml +
+        '<div style="display:flex;flex-direction:column;gap:2px;">' +
+        '<span style="font-size:0.85rem;opacity:0.85;">Додано до кошика</span>' +
+        '<span style="font-size:1rem;font-weight:600;">' + productName + '</span>' +
+        '</div>' +
+        '<span style="font-size:1.5rem;margin-left:auto;">✓</span>';
+    
     document.body.appendChild(notification);
     
     setTimeout(function() {
         notification.classList.add('show');
-    }, 100);
+    }, 10);
     
     setTimeout(function() {
         notification.classList.remove('show');
         setTimeout(function() {
-            document.body.removeChild(notification);
-        }, 300);
-    }, 3000);
+            if (notification.parentNode) {
+                document.body.removeChild(notification);
+            }
+        }, 500);
+    }, 3500);
 }
 
 // Зміна кількості товару
@@ -141,9 +161,12 @@ function renderCartPage() {
         var itemDiv = document.createElement('div');
         itemDiv.className = 'cart-page-item';
         
-        var emoji = item.product.category.includes('Рідинне') ? '❄️' : '🌀';
+        var imgSrc = item.product.image || '';
+        var imageHtml = imgSrc 
+            ? '<img src="' + imgSrc + '" alt="' + item.product.name + '" style="width:100%;height:100%;object-fit:cover;border-radius:10px;">'
+            : '<span style="font-size:2.5rem">' + (item.product.category.includes('Рідинне') ? '❄️' : '🌀') + '</span>';
         
-        itemDiv.innerHTML = '<div class="cart-item-image">' + emoji + '</div>' +
+        itemDiv.innerHTML = '<div class="cart-item-image" style="overflow:hidden;display:flex;align-items:center;justify-content:center;">' + imageHtml + '</div>' +
             '<div class="cart-item-details">' +
             '<h3>' + item.product.name + '</h3>' +
             '<p>' + item.product.category + '</p>' +

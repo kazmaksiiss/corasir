@@ -107,10 +107,12 @@ const products = [
 // PRELOADER (ЕКРАН ЗАВАНТАЖЕННЯ)
 // =============================================
 window.addEventListener('load', function() {
+    window.scrollTo(0, 0);
     setTimeout(function() {
         const preloader = document.getElementById('preloader');
         if (preloader) {
             preloader.classList.add('hidden');
+            document.body.classList.remove('preloader-active');
         }
     }, 1500); // Затримка 1.5 секунди
 });
